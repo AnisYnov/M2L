@@ -1,0 +1,14 @@
+body {
+	background: url("../img/sport.jpg") no-repeat fixed center center / 100% auto rgba(0, 0, 0, 0);
+}
+.white{
+    color:#000;
+    background-color:#fff;
+}
+
+.container{
+    margin-top: 13%;
+}
+.panel-title{
+    margin-left: 40%;
+}
