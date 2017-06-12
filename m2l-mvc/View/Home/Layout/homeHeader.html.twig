@@ -1,0 +1,47 @@
+
+  <header>
+    <nav>
+      <div class="line">
+        <div class="top-nav">
+          <div class="top-nav s-12 l-5">
+            <ul class="top-ul chevron">
+              <li><a href="index.php?page=accueil">Accueil</a>
+              </li>
+              <li><a href="index.php?page=historique">Historique</a>
+              </li>
+              <li><a href="index.php?page=logout">deconnexion</a>
+              </li>
+
+                {% if status == "chef d’équipe" %}
+              <li>
+                <a href="index.php?page=listeSalarie">liste des salaries</a>
+              </li>
+              {% endif %}
+
+            </ul>
+          </div>
+          <ul class="s-12 l-2">
+            <li class="logo hide-s hide-m">
+              <a href="index.php?page=accueil"><strong>M2L</strong></a>
+            </li>
+          </ul>
+          <div class="top-nav s-12 l-5">
+            <ul class="top-ul chevron">
+
+
+
+              <div class="span12">
+                <form id="custom-search-form" class="form-search form-horizontal ">
+                  <div class="input-append span12">
+                    <input type="text" class="search-query mac-style" placeholder="Search">
+                    <button type="submit" class="btn"><i class="icon-search"></i></button>
+                  </div>
+                </form>
+              </div>
+              <li style="color:#ffffff;">Bienvenue {{ user.prenom }} Credit: {{ user.credit }} Jour de formation: {{ user.nbs_jour}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>

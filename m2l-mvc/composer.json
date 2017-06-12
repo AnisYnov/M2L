@@ -1,0 +1,22 @@
+{
+    "name": "anis/m2l-mvc",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "AnisYnov",
+            "email": "benzid.anis75@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/var-dumper": "^3.2",
+        "twig/twig": "^2.3",
+        "websoftwares/session": "^0.1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Controller\\": "Controller/",
+            "Model\\": "Model/",
+            "Core\\": "Core/"
+        }
+    }
+}
