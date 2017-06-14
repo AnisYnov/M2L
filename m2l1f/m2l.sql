@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 28 Mars 2017 à 13:46
+-- Généré le :  Mer 14 Juin 2017 à 04:08
 -- Version du serveur :  5.7.14
 -- Version de PHP :  7.0.10
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `olin`
+-- Base de données :  `m2l`
 --
 
 -- --------------------------------------------------------
@@ -27,19 +27,22 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `adresse` (
-  `code_postal` int(11) NOT NULL,
   `id_a` int(11) NOT NULL,
+  `code_postal` int(11) NOT NULL,
   `numero_rue` int(11) NOT NULL,
-  `rue` int(11) NOT NULL,
-  `ville` int(11) NOT NULL
+  `rue` varchar(255) NOT NULL,
+  `ville` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `adresse`
 --
 
-INSERT INTO `adresse` (`code_postal`, `id_a`, `numero_rue`, `rue`, `ville`) VALUES
-(94000, 1, 11, 11, 11);
+INSERT INTO `adresse` (`id_a`, `code_postal`, `numero_rue`, `rue`, `ville`) VALUES
+(1, 28000, 11, 'rue marco', 'chartre'),
+(2, 244, 11, 'creil marco', 'creil'),
+(3, 28001, 2, 'rue', 'chartre'),
+(4, 27000, 2, 'rue', 'creille');
 
 -- --------------------------------------------------------
 
@@ -76,11 +79,7 @@ CREATE TABLE `formation` (
 --
 
 INSERT INTO `formation` (`id_f`, `titre`, `duree`, `cout`, `date_debut`, `nb_place`, `contenu`, `id_a`, `id_p`) VALUES
-(1, 'math', 50, 150, '2017-03-19', 50, 'ok', 1, 1),
-(2, 'foot', 7, 7, '2017-03-07', 3, 'fd', 1, 1),
-(3, 'tenis', 5, 500, '2017-03-21', 9, 'okoppm', 1, 1),
-(4, 'hnd', 5, 500, '2017-03-21', 7, 'okoppm', 1, 1),
-(5, 'kepo', 2, 200, '2017-03-21', 10, 'pll', 1, 1);
+(1, 'foot', 5, 100, '2017-06-16', 9, 'entrainement des bases', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -100,20 +99,7 @@ CREATE TABLE `formation_valide` (
 --
 
 INSERT INTO `formation_valide` (`id_v`, `id_f`, `id_s`, `etat_f`) VALUES
-(1, 2, 1, 'valider'),
-(2, 2, 1, 'valider'),
-(3, 3, 1, 'refusé'),
-(4, 4, 1, 'valider'),
-(5, 5, 1, 'refusé'),
-(6, 2, 1, 'valider'),
-(7, 2, 2, 'refusé'),
-(8, 3, 2, 'effectuée '),
-(9, 4, 2, 'valider'),
-(10, 5, 2, 'en cours de validation'),
-(11, 5, 1, 'refusé'),
-(12, 4, 1, 'valider'),
-(13, 4, 1, 'valider'),
-(14, 3, 1, 'refusé');
+(1, 1, 1, 'valider');
 
 -- --------------------------------------------------------
 
@@ -123,6 +109,7 @@ INSERT INTO `formation_valide` (`id_v`, `id_f`, `id_s`, `etat_f`) VALUES
 
 CREATE TABLE `prestataire` (
   `id_p` int(11) NOT NULL,
+  `nom` varchar(255) DEFAULT NULL,
   `raison_social` varchar(255) NOT NULL,
   `id_a` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -131,8 +118,9 @@ CREATE TABLE `prestataire` (
 -- Contenu de la table `prestataire`
 --
 
-INSERT INTO `prestataire` (`id_p`, `raison_social`, `id_a`) VALUES
-(1, 'detre', 1);
+INSERT INTO `prestataire` (`id_p`, `nom`, `raison_social`, `id_a`) VALUES
+(1, 'Ibo', 'prof php', 1),
+(2, 'michel', 'prof js', 2);
 
 -- --------------------------------------------------------
 
@@ -158,8 +146,9 @@ CREATE TABLE `salarie` (
 --
 
 INSERT INTO `salarie` (`id_s`, `nom`, `prenom`, `email`, `identifiant`, `mot_de_passe`, `status`, `credit`, `nbs_jour`, `id_a`) VALUES
-(1, 'ibo', 'abra', 'ab@ra', 'black', '202cb962ac59075b964b07152d234b70', 'salarié', 3300, 3, 1),
-(2, 'adm', 'adm', 'adm@adm', 'adm', '202cb962ac59075b964b07152d234b70', 'chef d’équipe', 3800, 8, 1);
+(1, 'ibo', 'olivier', 'devwebblack@gmail.com', 'olivier', '82e9dd1f989d339f09c629d0abd942d4', 'salarié', 3084, 99, 1),
+(2, 'adm', 'anis', 'adm@adm', 'anis', '340969df792b7283ce86d8d427426fe8', 'chef d’équipe', 1893, 1, 1),
+(3, 'admin', 'admin', 'admin@admin', 'admin', 'vaynee', 'admin', 3, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -211,6 +200,7 @@ ALTER TABLE `formation_valide`
 --
 ALTER TABLE `prestataire`
   ADD PRIMARY KEY (`id_p`),
+  ADD UNIQUE KEY `id_a_2` (`id_a`),
   ADD KEY `id_a` (`id_a`);
 
 --
@@ -234,27 +224,27 @@ ALTER TABLE `type_formation`
 -- AUTO_INCREMENT pour la table `adresse`
 --
 ALTER TABLE `adresse`
-  MODIFY `id_a` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_a` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT pour la table `formation`
 --
 ALTER TABLE `formation`
-  MODIFY `id_f` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_f` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `formation_valide`
 --
 ALTER TABLE `formation_valide`
-  MODIFY `id_v` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_v` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `prestataire`
 --
 ALTER TABLE `prestataire`
-  MODIFY `id_p` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_p` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT pour la table `salarie`
 --
 ALTER TABLE `salarie`
-  MODIFY `id_s` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_s` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `type_formation`
 --
@@ -265,17 +255,11 @@ ALTER TABLE `type_formation`
 --
 
 --
--- Contraintes pour la table `formation`
---
-ALTER TABLE `formation`
-  ADD CONSTRAINT `formation_ibfk_1` FOREIGN KEY (`id_a`) REFERENCES `adresse` (`id_a`) ON DELETE NO ACTION ON UPDATE CASCADE;
-
---
 -- Contraintes pour la table `formation_valide`
 --
 ALTER TABLE `formation_valide`
-  ADD CONSTRAINT `formation_valide_ibfk_1` FOREIGN KEY (`id_s`) REFERENCES `salarie` (`id_s`),
-  ADD CONSTRAINT `formation_valide_ibfk_2` FOREIGN KEY (`id_f`) REFERENCES `formation` (`id_f`);
+  ADD CONSTRAINT `formation_valide_ibfk_1` FOREIGN KEY (`id_s`) REFERENCES `salarie` (`id_s`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `formation_valide_ibfk_2` FOREIGN KEY (`id_f`) REFERENCES `formation` (`id_f`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `prestataire`

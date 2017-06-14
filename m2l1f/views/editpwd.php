@@ -46,24 +46,18 @@
 			    	<h1 class="panel-title">M2L</h1>
 			 	</div>
 			  	<div class="panel-body">
-			    	<form accept-charset="UTF-8" role="form">
+			    	<form action="../controllers/editpwdforget.php" method="post" accept-charset="UTF-8" role="form">
+                        <input type="hidden" name="id_s" value="<?=$_GET['id'] ?? ''?>">
                     <fieldset>
 			    	  	<div class="form-group">
-			    		    <input class="form-control" placeholder="pseudo" name="email" type="text">
+			    		    <input class="form-control" placeholder="Password" name="pwd" type="password">
 			    		</div>
-			    		<div class="form-group">
-			    			<input class="form-control" placeholder="Password" name="password" type="password" value="">
-			    		</div>
-			    		<div class="checkbox">
-			    	    	<label>
-			    	    		<input name="remember" type="checkbox" value="Remember Me"> Remember Me
-			    	    	</label>
-			    	    </div>
-			    		<input class="btn btn-lg btn-success btn-block" type="submit" value="Login">
+
+			    		<input class="btn btn-lg btn-success btn-block" type="submit" name="editpwd" value="moifier">
 			    	</fieldset>
 			      	</form>
                       <hr/>
-                    
+
 			    </div>
 			</div>
 		</div>
@@ -72,3 +66,4 @@
     </body>
 
 </html>
+<?php

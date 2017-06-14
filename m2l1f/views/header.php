@@ -1,7 +1,7 @@
 <?php  
 if(!isset($_SESSION['identifiant']) && !isset($_SESSION['id_s']))
 {
-    header("Location:./login.php");
+    header("Location:views/login.php");
 }
 ?>
 <!DOCTYPE html>
@@ -54,9 +54,9 @@ if(!isset($_SESSION['identifiant']) && !isset($_SESSION['id_s']))
               
 
       <div class="span12">
-            <form id="custom-search-form" class="form-search form-horizontal ">
+            <form id="custom-search-form" class="form-search form-horizontal " action="recherche-formations.php" method="post">
                 <div class="input-append span12">
-                    <input type="text" class="search-query mac-style" placeholder="Search">
+                    <input type="text" class="search-query mac-style" name="search" placeholder="Search">
                     <button type="submit" class="btn"><i class="icon-search"></i></button>
                 </div>
             </form>

@@ -17,7 +17,6 @@ if(isset($_POST['formconnexion'])) {
 }
 
     if(!empty($identifiant) AND !empty($mdpconnect)){
-        echo "ok";
         $userinfo = login($identifiant,$mdpconnect);
         if($userinfo != false) {
             session_start();
